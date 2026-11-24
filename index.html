@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Glacier Water Solutions — Billing, Stock & Accounts</title>
+  <meta name="description" content="Billing, GST invoices, case/bottle stock, production and accounts for Glacier Water Solutions.">
+  <meta property="og:title" content="Glacier Water Solutions">
+  <meta property="og:description" content="One dependable workplace for water-factory billing, stock and accounts.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0B2230">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="icons/icon-32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="vendor/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7.3 6 10.9 6 14.5a6 6 0 0 0 12 0c0-3.6-2.6-7.2-6-12Z"/></svg></span>
+        <span class="brand-text"><strong>Glacier</strong><small>Water Solutions</small></span>
+      </div>
+      <nav id="nav" class="nav"></nav>
+      <div class="sidebar-foot">
+        <div id="sideUser" class="side-user"></div>
+        <button class="side-logout" data-act="logout" type="button">Log out</button>
+        <div class="side-ver">v1.0 · local-first</div>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim" data-act="close-nav" aria-hidden="true"></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn burger" data-act="toggle-nav" type="button" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div class="topbar-title"><span id="crumb">Workspace</span><strong id="pageTitle">Dashboard</strong></div>
+        <div class="topbar-actions">
+          <button class="btn ghost compact" data-act="go" data-view="backup" type="button"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg><span>Backup</span></button>
+          <button class="icon-btn" data-act="logout" type="button" aria-label="Log out" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14 5-5-5-5m5 5H9"/></svg></button>
+        </div>
+      </header>
+      <main id="view" tabindex="-1"></main>
+      <footer class="foot-note" id="footNote"></footer>
+    </div>
+  </div>
+
+  <div id="authLayer" class="auth-layer" hidden></div>
+  <div id="modalRoot" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="core.js"></script>
+  <script src="ui.js"></script>
+  <script src="backup.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "glacier-water-solutions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first billing, stock, production and accounts app for Glacier Water Solutions",
+  "scripts": {
+    "test": "node tests/smoke.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}
