@@ -20,9 +20,9 @@ PLAN: PROJECT_PLAN.md · PRD.md · TRD.md
 - [x] 16. PWA: manifest, service worker, icons, offline
 - [x] 17. Tests: jsdom smoke + calculation assertions (77 green)
 - [x] 18. Responsive + accessibility + QA checklist pass
-- [ ] 19. Commit, create GitHub repo, enable Pages, deploy
-- [ ] 20. Verify live URL/assets, report to Shan
+- [x] 19. Commit, create GitHub repo, enable Pages, deploy
+- [x] 20. Verify live URL/assets, report to Shan
 
 KEY DECISIONS: static local-first PWA on GitHub Pages (no Node/Postgres on free hosting); integer-paise money; stock derived from ledger; client-side calculations honestly disclosed; glacier slate + cyan design.
 
-NOW: step 19 — commit and deploy to GitHub Pages.
+NOW: complete and LIVE at https://smartbooksbasha-svg.github.io/glacier-water-solutions/ — 77 tests green, cache gws-v2, all assets 200.
