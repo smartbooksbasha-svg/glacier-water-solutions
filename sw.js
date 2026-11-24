@@ -1,5 +1,5 @@
 /* Glacier Water Solutions — offline app shell. Bump CACHE on each release. */
-var CACHE = 'gws-v1';
+var CACHE = 'gws-v2';
 var SHELL = [
   './', './index.html', './styles.css', './core.js', './ui.js', './backup.js', './app.js',
   './vendor/jspdf.umd.min.js', './vendor/jspdf.plugin.autotable.min.js',

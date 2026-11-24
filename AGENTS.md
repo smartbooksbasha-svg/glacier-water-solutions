@@ -9,7 +9,7 @@ Static local-first PWA for a packaged drinking water manufacturer: GST billing, 
 - `ui.js` — all screens, forms, modals, tables, report data.
 - `app.js` — boot, auth, hash router, event delegation, save/confirm/cancel actions.
 - `backup.js` — JSON restore, SpreadsheetML `.xls`, CSV, jsPDF PDF export.
-- `sw.js` / `manifest.webmanifest` / `icons/` — PWA offline shell. Bump `gws-v1` on every release.
+- `sw.js` / `manifest.webmanifest` / `icons/` — PWA offline shell. Bump `gws-v2` on every release.
 - `tests/smoke.mjs` — jsdom full-flow test; `npm test`.
 
 ## Commands
