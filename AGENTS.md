@@ -29,4 +29,5 @@ Static local-first PWA for a packaged drinking water manufacturer: GST billing, 
 - 77 jsdom assertions green, syntax checks green, no external runtime hosts.
 - LIVE: https://smartbooksbasha-svg.github.io/glacier-water-solutions/ — all key assets verified 200, offline cache `gws-v2`.
 - Repo: `smartbooksbasha-svg/glacier-water-solutions` (main, commits c4b3685 → a778bad → 920c8e8).
+- RDP PDF delivered 2026-11-25: `RDP.md` -> `RDP.tex` -> `RDP.pdf` (17 pages), saved to `~/storage/shared/Download/GLACIER-WATER-SOLUTIONS-RDP.pdf`.
 - NEXT: Shan ke auditor se rates/GSTIN/address/opening balances confirm karke company settings update karna.
