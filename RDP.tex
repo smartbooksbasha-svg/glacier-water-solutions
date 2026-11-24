@@ -1,0 +1,254 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=1.8cm,right=1.8cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{tabularx,array,longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\sloppy
+\setlength{\emergencystretch}{3em}
+\definecolor{headnavy}{HTML}{0F2B3A}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\titleformat{\section}{\Large\bfseries\color{headnavy}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{headnavy}}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{4cm}
+{\Huge\bfseries\color{headnavy} Glacier Water Solutions - RDP v2.0\par}
+\vspace{16pt}
+{\large \textbf{Document:} Requirements and Design Plan (PRD + TRD + Build Record)\par}
+\vfill
+\end{titlepage}
+\tableofcontents
+
+\textbf{Document:} Requirements and Design Plan (PRD + TRD + Build Record)
+\textbf{Version:} 2.0
+\textbf{Date:} 25 November 2026
+\textbf{Status:} LIVE - verified and deployed
+\textbf{Prepared for:} Shan / Glacier Water Solutions
+\textbf{Owner:} Isthiyaque Basha (smartbooksbasha@gmail.com)
+\vspace{2pt}\noindent\rule{\linewidth}{0.4pt}\vspace{4pt}
+\clearpage
+\section{1. Executive summary}
+Glacier Water Solutions is a responsive, offline-capable website for a packaged drinking-water manufacturer. It replaces scattered register books and Excel files with one workplace for GST billing, case and bottle stock, production batches, purchases, expenses, cash and bank entries, reports, role-based login, audit history, and backups.
+The delivered build is a static local-first PWA on GitHub Pages. It is fully usable after the first load, keeps records in the browser, and exports portable JSON, Excel and PDF files. The original RDP recommended a Node API and PostgreSQL server; that path is documented as the upgrade route for shared multi-device data and statutory use.
+Live link and repository are listed in section 11.
+\clearpage
+\section{2. Document control}
+\begin{center}\small\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}
+\hline
+\textbf{Item} & \textbf{Value} \\
+\hline
+Source RDP & 6-page PDF supplied by Shan on 24 Nov 2026 \\
+\hline
+Source Drive ID & 1HTdY7MUAL9d9QiCqDVD2vryVUXk4Njsi \\
+\hline
+Project folder & /data/data/com.termux/files/home/glacier-water-solutions \\
+\hline
+Live URL & \path{https://smartbooksbasha-svg.github.io/glacier-water-solutions/} \\
+\hline
+Repository & smartbooksbasha-svg/glacier-water-solutions \\
+\hline
+Offline cache & gws-v2 \\
+\hline
+Test result & 77 jsdom assertions green \\
+\hline
+Open approval & GSTIN, address, rates, HSN and opening balances from auditor \\
+\hline
+\end{tabularx}\end{center}
+\clearpage
+\section{3. Product vision and goals}
+\subsection{3.1 Vision}
+One dependable workplace where the owner, admin, accountant and staff can record daily water-factory operations and trust the numbers at month end.
+\subsection{3.2 Goals}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item Create and confirm GST invoices with configurable price, discount and tax treatment, with unique numbering.
+\item Keep stock accurate in bottles and cases, derived from a movement ledger instead of a hand-edited number.
+\item Record production batches, rejected bottles and raw-material consumption, then post finished stock.
+\item Track customers, suppliers, expenses, cash, bank, capital and drawings.
+\item Produce daily, monthly and auditor-ready reports with PDF, Excel and CSV exports.
+\item Provide role-based login, a complete audit log, backup and restore, and a month lock.
+\end{itemize}
+\clearpage
+\section{4. Scope}
+\subsection{4.1 Included in v1}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item Company profile with GSTIN, registered address, state, financial year and configurable defaults.
+\item Masters: products, raw materials, customers, suppliers and expense heads.
+\item Sales invoices with line items in bottles or cases, discount, CGST/SGST or IGST, round-off and PDF.
+\item Purchase bills with supplier, GST, freight, other charges, proof reference and stock posting.
+\item Inventory with opening stock, ledger, adjustments, damage, leakage, expiry, wastage and low-stock alerts.
+\item Production batches with good and rejected output plus raw-material usage.
+\item Accounts with customer and supplier ledgers, cash book, bank book, receipts, payments, capital and drawings.
+\item Reports with date filters: sales, purchase, stock, production, ledgers, expenses, cash and bank, GST summary, monthly management.
+\item Owner, admin, accountant and staff roles with route and action guards.
+\item Audit log for login, failure, logout, every financial mutation, cancellation, export, restore and month lock.
+\item JSON backup and restore, SpreadsheetML Excel workbook, CSV reports and PDF report, invoice and audit log.
+\item Installable PWA with self-hosted fonts, icons, service worker and offline app shell.
+\item Responsive layout down to 375 px phone width, visible focus states and labelled icon buttons.
+\end{itemize}
+\subsection{4.2 Excluded from v1}
+Native mobile app, payment gateway, bank sync, WhatsApp automation, e-invoice, e-waybill, multi-branch, payroll, attendance and advanced costing.
+\clearpage
+\section{5. Users and roles}
+\begin{center}\small\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}
+\hline
+\textbf{Role} & \textbf{Main use} & \textbf{Access} \\
+\hline
+Owner & Full control, setup, settings, users, reopen month, restore, audit & All screens and actions \\
+\hline
+Admin & Daily sales, purchase, stock, production, expenses and reports & Operational screens, no owner settings \\
+\hline
+Accountant & Reconciliation, GST reports, ledgers and exports & Financial screens, no user management \\
+\hline
+Staff & Assigned data entry only & Dashboard, sales, production, inventory and materials \\
+\hline
+\end{tabularx}\end{center}
+First run creates the owner account. Passwords are hashed with an iterated WebCrypto digest where available. A session has a 12-hour expiry. Five failed login attempts lock login for five minutes. Every login, failure and logout is audited.
+\clearpage
+\section{6. Functional modules}
+\subsection{6.1 Sales invoices}
+Select customer, choose product lines, enter quantity in bottle or case, rate, discount and payment mode. The preview shows taxable value, tax, round-off and grand total before saving. Save creates a draft. Confirm posts the stock ledger and customer receivable. Cancel writes an equal and opposite reversal and records the reason. Duplicate invoice numbers are rejected.
+\subsection{6.2 Purchase bills}
+Record supplier bill number, date, lines, GST, freight, other charges and amount paid. Confirm credits raw material or finished product stock and creates the supplier payable. Proof reference can be stored as a text note or file name.
+\subsection{6.3 Inventory}
+Opening stock is editable before go-live. Every movement is a ledger row with date, product, delta in bottles, type, reference, note and user. Current stock is calculated from opening plus all ledger deltas. Adjustments handle leakage, damage, expiry and corrections. Low-stock alerts use editable thresholds.
+\subsection{6.4 Production}
+Each batch records date, batch number, product, good bottles, rejected bottles and raw-material consumption. Confirm credits finished stock and debits raw materials. Nothing posts from a draft batch.
+\subsection{6.5 Accounts}
+Customer balance equals confirmed invoices minus receipts. Supplier balance equals confirmed purchase bills minus payments. Cash and bank entries record direction, account, category, amount and reference. Expense register records category, mode, amount and note.
+\subsection{6.6 Reports and exports}
+Reports share one date filter. Export options are CSV for single reports, Excel workbook for all registers, and A4 PDF for monthly report, invoice and audit log. On-screen totals and export totals come from the same calculation functions.
+\clearpage
+\section{7. Business rules and calculations}
+\begin{center}\small\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}
+\hline
+\textbf{Rule} & \textbf{Implementation} \\
+\hline
+Money & Integer paise everywhere; convert at input, format at display \\
+\hline
+Case conversion & bottles = qty x bottles-per-case when unit is case \\
+\hline
+Default case sizes & 300 ml = 30, 500 ml = 24, 1000 ml = 24 \\
+\hline
+Line amount & bottles x rate per bottle \\
+\hline
+Taxable value & Sum of line amounts minus discount \\
+\hline
+Same state & CGST and SGST split the tax equally \\
+\hline
+Different state & IGST carries the full tax \\
+\hline
+Grand total & Taxable plus tax, rounded to nearest rupee \\
+\hline
+Stock & Opening plus sum of ledger deltas \\
+\hline
+Confirm & Posts ledger and balances, writes audit entry \\
+\hline
+Cancel & Writes reversal, sets cancelled, keeps original record \\
+\hline
+Month lock & Locked months reject new posting; owner reopen is audited \\
+\hline
+\end{tabularx}\end{center}
+Negative stock is blocked on confirm. Case and bottle conversion never silently rounds: the display shows full cases plus loose bottles. GSTIN, HSN, address and tax rates are editable and remain marked unapproved until the auditor confirms them.
+\clearpage
+\section{8. Data model}
+Data lives in localStorage under the \texttt{gws\_} prefix. Main collections are company, settings, users, session, products, materials, customers, suppliers, invoices, purchases, production, expenses, cashbank, ledger, adjust, audit, locks and id sequences.
+A JSON backup carries a schema version and all collections. Restore validates arrays and required fields before replacing records. Because the browser is the only store in this build, the exported backup is the portable copy of the business data.
+\clearpage
+\section{9. Technical architecture}
+\begin{center}\small\begin{tabularx}{\linewidth}{|*{3}{>{\raggedright\arraybackslash}X|}}
+\hline
+\textbf{Layer} & \textbf{File} & \textbf{Responsibility} \\
+\hline
+Shell & index.html & App frame, auth layer, sidebar, modal root \\
+\hline
+Design & styles.css & Glacier tokens, responsive drawer, tables, forms, focus states \\
+\hline
+Rules & core.js & Store, money, GST math, ledger stock, roles, audit, month lock \\
+\hline
+Screens & ui.js & All views, forms, modals and report rendering \\
+\hline
+Actions & app.js & Boot, auth, hash router, event delegation, save and post actions \\
+\hline
+Export & backup.js & JSON restore, Excel XML, CSV and jsPDF PDF \\
+\hline
+Offline & sw.js, manifest.webmanifest, icons & Installable PWA, cached app shell \\
+\hline
+QA & tests/smoke.mjs & jsdom end-to-end flow and calculation checks \\
+\hline
+\end{tabularx}\end{center}
+There is no build step. Fonts, PDF libraries and icons are self-hosted so the app works offline after first load. No runtime request goes to an external host.
+\subsection{9.1 Why static local-first}
+Free GitHub Pages cannot run Node or PostgreSQL. No paid backend was supplied. The rules were therefore implemented in one browser and disclosed in Settings. For shared data across devices and statutory system-of-record use, move the same rule functions behind a Node API and PostgreSQL while keeping this UI.
+\clearpage
+\section{10. UI design system}
+The look uses a cool glacier/cyan palette and a compact professional layout. Colors are slate \texttt{\#0B2230}, white surface \texttt{\#FFFFFF}, cyan accent \texttt{\#0E7490}, with separate success, warning and danger colors. Display type is Space Grotesk 700; body type is Work Sans 400 and 500. Icons are inline SVG, not emoji. Sidebar navigation groups Work, Masters, Accounts and Control. On phones the sidebar becomes a drawer. Tables scroll or wrap cleanly and touch targets stay at least 42 px.
+\clearpage
+\section{11. Deployment and live status}
+\begin{center}\small\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}
+\hline
+\textbf{Item} & \textbf{Value} \\
+\hline
+Live URL & \path{https://smartbooksbasha-svg.github.io/glacier-water-solutions/} \\
+\hline
+Repository & \path{https://github.com/smartbooksbasha-svg/glacier-water-solutions} \\
+\hline
+Branch & main \\
+\hline
+Pages source & main branch root, legacy build \\
+\hline
+Offline cache & gws-v2 \\
+\hline
+Last verified & 25 Nov 2026 - all key assets returned 200 \\
+\hline
+\end{tabularx}\end{center}
+All key assets were verified live: index, styles, core, ui, app, backup, service worker, manifest, fonts, icons and both vendored PDF libraries.
+\clearpage
+\section{12. Verification record}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item \texttt{npm test} runs \texttt{tests/smoke.mjs}: 77 assertions green.
+\item \texttt{node --check} passed for core, ui, backup, app and service worker.
+\item Smoke test covers first-run setup, company settings, masters, invoice math, confirm, cancel reversal, purchase posting, production consumption, adjustments, expenses, cash, month lock, reports, JSON/Excel/PDF exports, role gating and failed-login audit.
+\item Static audit found no external runtime hosts in application files.
+\item Live asset check returned 200 for every key file.
+\end{itemize}
+\clearpage
+\section{13. Known limitations and open approvals}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item Data is per browser. Different devices do not share records unless a backup is moved manually or a server is added.
+\item Calculations run in the browser. A server-backed version is required before treating this as the statutory system of record.
+\item GSTIN, registered address, state, HSN, tax rates, prices, MRP and opening balances are defaults until the auditor confirms them.
+\item No e-invoice, e-waybill or payment gateway in v1.
+\item Clearing browser storage removes local data; keep regular JSON backups.
+\end{itemize}
+\clearpage
+\section{14. Upgrade roadmap}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item Node API with PostgreSQL, moving GST math, stock ledger and audit writes server-side.
+\item Authentication with server sessions and per-user permissions.
+\item Shared multi-device database with nightly backups.
+\item E-invoice and e-waybill integration after auditor sign-off.
+\item Barcode or QR product scan and WhatsApp report sharing as separate scoped features.
+\end{itemize}
+\clearpage
+\section{15. Acceptance checklist}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item Invoice totals reconcile to ledgers.
+\item Stock summary equals opening plus receipts minus issues for every product.
+\item Every report export matches on-screen numbers.
+\item Audit log contains every login and financial mutation.
+\item Layout works on a 375 px phone without horizontal overflow.
+\item App installs and opens offline after the first load.
+\item Owner can export JSON, Excel and PDF backups and restore from JSON.
+\end{itemize}
+\end{document}
